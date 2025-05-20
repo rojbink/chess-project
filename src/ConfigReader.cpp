@@ -1,4 +1,4 @@
-#include "ConfigReader.hpp"
+#include "../include/ConfigReader.hpp"
 #include <fstream>
 #include <iostream>
 

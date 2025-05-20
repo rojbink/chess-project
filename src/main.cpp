@@ -1,4 +1,4 @@
-#include "ConfigReader.hpp"
+#include "../include/ConfigReader.hpp"
 #include <iostream>
 #include <string>
 
@@ -14,11 +14,10 @@ void displaySpecialAbilities(const SpecialAbilities &abilities) {
     std::cout << "Promotion ";
   if (abilities.en_passant)
     std::cout << "En-passant ";
-
   // Display any custom abilities
-  for (const auto &[key, value] : abilities.custom_abilities) {
-    if (value) {
-      std::cout << key << " ";
+  for (const auto &pair : abilities.custom_abilities) {
+    if (pair.second) {
+      std::cout << pair.first << " ";
     }
   }
 }
