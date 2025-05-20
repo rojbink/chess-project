@@ -1,7 +1,8 @@
 #pragma once
 
+#include "Utilities.hpp"
 #include <memory>
-#include "../nlohmann/json.hpp"
+#include "nlohmann/json.hpp"
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -16,10 +17,10 @@ struct PortalConfig;
 struct GameConfig;
 
 // Position on the chess board
-struct Position {
-  int x;
-  int y;
-};
+// struct Position {
+//   int x;
+//   int y;
+// };
 
 // Movement capabilities for chess pieces
 struct Movement {

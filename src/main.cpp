@@ -1,4 +1,5 @@
 #include "../include/ConfigReader.hpp"
+#include "../include/GameManager.hpp"
 #include <iostream>
 #include <string>
 
@@ -127,6 +128,17 @@ int main(int argc, char *argv[]) {
     }
     std::cout << std::endl;
   }
+
+  // Create and Initialize GameManager
+  GameManager gameManager(config);
+  gameManager.initializeGame();
+
+  // Display the initial board state via GameManager
+  gameManager.displayBoard();
+  
+  std::cout << "\nGame initialized. Ready to start (game loop not yet implemented)." << std::endl;
+
+  // TODO: Implement game loop (e.g., gameManager.runGame();)
 
   return 0;
 }

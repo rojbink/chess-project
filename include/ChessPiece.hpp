@@ -23,6 +23,9 @@ public:
     virtual bool canMoveTo(const Position& from, const Position& to, 
                           const class ChessBoard& board) const = 0;
     
+    // Get symbol for display
+    virtual std::string getSymbol() const = 0;
+    
     // Special abilities
     bool hasSpecialAbility(const std::string& ability) const;
     int getAbilityValue(const std::string& ability) const;
@@ -53,36 +56,42 @@ class King : public ChessPiece {
 public:
     King(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 class Queen : public ChessPiece {
 public:
     Queen(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 class Rook : public ChessPiece {
 public:
     Rook(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 class Bishop : public ChessPiece {
 public:
     Bishop(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 class Knight : public ChessPiece {
 public:
     Knight(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 class Pawn : public ChessPiece {
 public:
     Pawn(Color color);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };
 
 // Custom piece implementation with configurable movement
@@ -92,4 +101,5 @@ public:
                 const std::unordered_map<std::string, int>& movement,
                 const std::unordered_map<std::string, int>& abilities);
     bool canMoveTo(const Position& from, const Position& to, const ChessBoard& board) const override;
+    std::string getSymbol() const override;
 };

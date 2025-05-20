@@ -184,6 +184,10 @@ bool King::canMoveTo(const Position& from, const Position& to, const ChessBoard&
     return false;
 }
 
+std::string King::getSymbol() const {
+    return (color == Color::WHITE) ? "♚" : "♔"; // ♔ vs ♚
+}
+
 Queen::Queen(Color color) : ChessPiece(color, "Queen") {
     movementProperties["forward"] = 8;
     movementProperties["sideways"] = 8;
@@ -213,6 +217,10 @@ bool Queen::canMoveTo(const Position& from, const Position& to, const ChessBoard
     return false;
 }
 
+std::string Queen::getSymbol() const {
+    return (color == Color::WHITE) ? "♛" : "♕"; // ♕ vs ♛
+}
+
 Rook::Rook(Color color) : ChessPiece(color, "Rook") {
     movementProperties["forward"] = 8;
     movementProperties["sideways"] = 8;
@@ -236,6 +244,10 @@ bool Rook::canMoveTo(const Position& from, const Position& to, const ChessBoard&
     return false;
 }
 
+std::string Rook::getSymbol() const {
+    return (color == Color::WHITE) ? "♜" : "♖"; // ♖ vs ♜
+}
+
 Bishop::Bishop(Color color) : ChessPiece(color, "Bishop") {
     movementProperties["diagonal"] = 8;
 }
@@ -253,6 +265,10 @@ bool Bishop::canMoveTo(const Position& from, const Position& to, const ChessBoar
     return false;
 }
 
+std::string Bishop::getSymbol() const {
+    return (color == Color::WHITE) ? "♝" : "♗"; // ♗ vs ♝
+}
+
 Knight::Knight(Color color) : ChessPiece(color, "Knight") {
     specialAbilities["jump_over"] = 1;
 }
@@ -266,6 +282,10 @@ bool Knight::canMoveTo(const Position& from, const Position& to, const ChessBoar
     }
     
     return false;
+}
+
+std::string Knight::getSymbol() const {
+    return (color == Color::WHITE) ? "♞" : "♘"; // ♘ vs ♞
 }
 
 Pawn::Pawn(Color color) : ChessPiece(color, "Pawn") {
@@ -314,6 +334,10 @@ bool Pawn::canMoveTo(const Position& from, const Position& to, const ChessBoard&
     }
     
     return false;
+}
+
+std::string Pawn::getSymbol() const {
+    return (color == Color::WHITE) ? "♟" : "♙"; // ♙ vs ♟
 }
 
 // Custom piece implementation
@@ -377,4 +401,25 @@ bool CustomPiece::canMoveTo(const Position& from, const Position& to, const Ches
     }
     
     return false;
+}
+
+std::string CustomPiece::getSymbol() const {
+    // For custom pieces, use a generic Unicode symbol or first letter if type is simple ASCII
+    if (!type.empty()) {
+        // Basic check if type is simple ASCII, otherwise use default symbols
+        // A more robust check might be needed for complex types.
+        bool simple_type = true;
+        for(char c : type) {
+            if (static_cast<unsigned char>(c) > 127) {
+                simple_type = false;
+                break;
+            }
+        }
+        if (simple_type) {
+             return (color == Color::WHITE) ? 
+                    std::string(1, toupper(type[0])) : 
+                    std::string(1, tolower(type[0]));
+        }
+    }
+    return (color == Color::WHITE) ? "◇" : "◆"; // ◇ vs ◆
 }

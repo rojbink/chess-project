@@ -1,5 +1,7 @@
 #include "../include/ChessBoard.hpp"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 ChessBoard::ChessBoard(int size) : size(size) {}
 
@@ -114,4 +116,47 @@ std::optional<Position> ChessBoard::findPiece(const std::string& type, Color col
     }
     
     return std::nullopt;
+}
+
+void ChessBoard::displayBoard(std::ostream& os) const {
+    os << std::endl;
+    // Print column headers (A, B, C, ...)
+    os << "  "; // Indent for row numbers
+    for (int i = 0; i < size; ++i) {
+        os << " " << static_cast<char>('A' + i) << "  "; // Adjusted spacing slightly for Unicode symbols
+    }
+    os << std::endl;
+
+    os << "  +-"; // Top border start
+    for (int i = 0; i < size; ++i) {
+        os << "----+"; // Adjusted for potentially wider characters
+    }
+    os << std::endl;
+
+    for (int y = size - 1; y >= 0; --y) {
+        os << y + 1 << " | "; // Print row number (1-indexed)
+        for (int x = 0; x < size; ++x) {
+            const ChessPiece* piece = getPieceAt({x, y});
+            if (piece) {
+                os << piece->getSymbol() << " | "; // getSymbol() now returns std::string
+            } else {
+                // Using Unicode middle dot for light empty squares
+                os << ((x + y) % 2 == 0 ? "·" : " ") << " | "; // · vs space
+            }
+        }
+        os << y + 1 << std::endl; // Print row number again at the end
+
+        os << "  +-"; // Separator line start
+        for (int i = 0; i < size; ++i) {
+            os << "----+"; // Adjusted for potentially wider characters
+        }
+        os << std::endl;
+    }
+
+    // Print column headers again at the bottom
+    os << "  "; // Indent for row numbers
+    for (int i = 0; i < size; ++i) {
+        os << " " << static_cast<char>('A' + i) << "  "; // Adjusted spacing slightly
+    }
+    os << std::endl << std::endl;
 }

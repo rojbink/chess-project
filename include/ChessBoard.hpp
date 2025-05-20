@@ -2,6 +2,7 @@
 
 #include "ChessPiece.hpp"
 #include "Utilities.hpp"
+#include <iostream>
 #include <unordered_map>
 #include <memory>
 #include <string>
@@ -32,6 +33,9 @@ public:
     
     // Find a specific piece type
     std::optional<Position> findPiece(const std::string& type, Color color) const;
+    
+    // Display
+    void displayBoard(std::ostream& os = std::cout) const;
     
 private:
     // The board is represented as a hashmap from position to piece
